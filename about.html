@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us — BuildFlow</title>
+<meta name="description" content="BuildFlow is a Calgary-based team of 5 specialists in web design, automation, and AI — built to help Canadian contractors grow their revenue."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05060f;--bg2:#080a18;
+  --border:rgba(255,255,255,0.08);
+  --white:#eef0ff;--muted:#8b90b8;
+  --accent:#7b6fff;--accent2:#00cfff;
+  --green:#00e5a0;
+  --grad:linear-gradient(135deg,#7b6fff 0%,#00cfff 100%);
+  --grad-r:linear-gradient(135deg,#00cfff 0%,#7b6fff 100%);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+#galaxy-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.page-content{position:relative;z-index:1}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 60px;background:rgba(5,6,15,0.78);backdrop-filter:blur(20px);border-bottom:1px solid rgba(123,111,255,0.15)}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;text-decoration:none;letter-spacing:-0.5px;color:var(--white)}
+.logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:8px 16px;border-radius:8px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:rgba(255,255,255,0.06)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.btn-nav-ghost{color:var(--muted);font-size:14px;font-weight:500;text-decoration:none;padding:8px 16px;border-radius:8px;border:1px solid var(--border);transition:color .2s,border-color .2s}
+.btn-nav-ghost:hover{color:var(--white);border-color:rgba(123,111,255,0.4)}
+
+/* BUTTONS */
+.btn-glow{display:inline-flex;align-items:center;gap:9px;background:var(--grad);color:#fff;font-weight:700;font-size:15px;padding:13px 28px;border-radius:10px;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.btn-glow::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.18),transparent);opacity:0;transition:opacity .25s}
+.btn-glow:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 32px rgba(123,111,255,0.55)}
+.btn-glow:hover::before{opacity:1}
+.btn-glow:active{transform:scale(0.98)}
+.btn-glow .arrow{transition:transform .25s}
+.btn-glow:hover .arrow{transform:translateX(4px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,0.05);color:var(--white);font-weight:600;font-size:15px;padding:13px 28px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.1);transition:transform .25s,border-color .25s,background .25s,box-shadow .25s}
+.btn-ghost:hover{transform:translateY(-2px);border-color:rgba(123,111,255,0.5);background:rgba(123,111,255,0.08);box-shadow:0 4px 24px rgba(123,111,255,0.2)}
+
+/* PAGE HERO */
+.page-hero{padding:140px 80px 80px;text-align:center;position:relative}
+.page-hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:60px;background:linear-gradient(to bottom,rgba(123,111,255,0.5),transparent)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:18px;justify-content:center}
+.eyebrow::before{content:'';width:28px;height:2px;background:var(--grad);border-radius:2px}
+.page-h{font-family:'Syne',sans-serif;font-size:clamp(36px,5.5vw,64px);font-weight:800;letter-spacing:-2px;line-height:1.06;max-width:760px;margin:0 auto 20px}
+.page-h em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-sub{font-size:18px;color:var(--muted);max-width:580px;margin:0 auto 44px;line-height:1.85}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.location-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:100px;padding:8px 20px;font-size:13px;color:var(--muted);margin-bottom:24px}
+.loc-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease infinite}
+
+/* SECTIONS */
+.section{padding:90px 80px}
+.section.alt{background:rgba(255,255,255,0.015);backdrop-filter:blur(4px)}
+.sec-ey{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:16px}
+.sec-ey::before{content:'';width:24px;height:2px;background:var(--grad);border-radius:2px}
+.sec-h{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,44px);font-weight:800;letter-spacing:-1.5px;line-height:1.12;max-width:580px}
+.sec-p{font-size:16px;color:var(--muted);max-width:520px;margin-top:14px;line-height:1.85}
+.ctr{text-align:center}
+.ctr .sec-h,.ctr .sec-p{margin-left:auto;margin-right:auto}
+.ctr .sec-ey{justify-content:center}
+
+/* ── STORY SECTION ── */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.story-text p{font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:18px}
+.story-text p strong{color:var(--white)}
+.story-text p:last-child{margin-bottom:0}
+
+/* story visual — Calgary card */
+.story-visual{position:relative}
+.city-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative;overflow:hidden}
+.city-card::before{content:'';position:absolute;top:-80px;right:-80px;width:250px;height:250px;background:radial-gradient(circle,rgba(123,111,255,0.12),transparent 70%)}
+.city-card::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,207,255,0.08),transparent 70%)}
+.city-skyline{font-size:56px;text-align:center;margin-bottom:20px;display:block;animation:floatY 5s ease-in-out infinite}
+.city-name{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;text-align:center;margin-bottom:4px}
+.city-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:28px}
+.city-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cs{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.cs-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.cs-lbl{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;margin-top:60px;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent)}
+.tl-item{position:relative;margin-bottom:44px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-36px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--grad);box-shadow:0 0 12px rgba(123,111,255,0.5)}
+.tl-year{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent2);margin-bottom:6px;text-transform:uppercase}
+.tl-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-0.3px}
+.tl-desc{font-size:14px;color:var(--muted);line-height:1.75}
+
+/* ── TEAM ── */
+.team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:52px}
+.team-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:18px;padding:28px 20px;text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:default}
+.team-card:hover{transform:translateY(-7px);border-color:rgba(123,111,255,0.4);box-shadow:0 16px 48px rgba(123,111,255,0.15)}
+.team-avatar{width:72px;height:72px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 16px;position:relative}
+.team-avatar::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:var(--grad);z-index:-1;opacity:0;transition:opacity .3s;filter:blur(8px)}
+.team-card:hover .team-avatar::after{opacity:0.6}
+.team-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;margin-bottom:4px;letter-spacing:-0.3px}
+.team-role{font-size:12px;color:var(--accent2);font-weight:600;margin-bottom:10px;letter-spacing:.3px}
+.team-bio{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* ── VALUES ── */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.val-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:18px;padding:32px;transition:transform .3s,border-color .3s}
+.val-card:hover{transform:translateY(-5px);border-color:rgba(123,111,255,0.3)}
+.val-icon{font-size:36px;margin-bottom:18px;display:block}
+.val-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:10px;letter-spacing:-0.4px}
+.val-desc{font-size:14px;color:var(--muted);line-height:1.75}
+
+/* ── APPROACH ── */
+.approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.approach-steps{display:flex;flex-direction:column;gap:0;margin-top:36px}
+.ap-step{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--border);position:relative;transition:background .2s}
+.ap-step:last-child{border-bottom:none}
+.ap-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;flex-shrink:0;width:44px}
+.ap-title{font-weight:700;font-size:16px;margin-bottom:5px}
+.ap-desc{font-size:13.5px;color:var(--muted);line-height:1.7}
+
+/* approach visual */
+.approach-visual{display:flex;flex-direction:column;gap:12px}
+.av-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:center;gap:16px;transition:border-color .3s,transform .3s}
+.av-card:hover{border-color:rgba(123,111,255,0.3);transform:translateX(6px)}
+.av-icon{width:44px;height:44px;border-radius:10px;background:rgba(123,111,255,0.1);border:1px solid rgba(123,111,255,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.av-title{font-weight:700;font-size:14px;margin-bottom:3px}
+.av-desc{font-size:12px;color:var(--muted)}
+
+/* ── SUPPORT ── */
+.support-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:52px}
+.sup-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:18px;padding:30px;transition:transform .3s,border-color .3s}
+.sup-card:hover{transform:translateY(-5px);border-color:rgba(0,207,255,0.3)}
+.sup-icon{font-size:32px;margin-bottom:16px}
+.sup-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-0.4px}
+.sup-desc{font-size:14px;color:var(--muted);line-height:1.75}
+.sup-tag{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.2);padding:4px 12px;border-radius:100px}
+
+/* ── NUMBERS ── */
+.numbers-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.num-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;transition:transform .3s,border-color .3s}
+.num-card:hover{transform:translateY(-4px);border-color:rgba(123,111,255,0.3)}
+.num-val{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;letter-spacing:-2px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.num-lbl{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* ── CTA ── */
+.cta-section{padding:90px 80px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(123,111,255,0.16) 0%,transparent 70%);pointer-events:none}
+.cta-section .sec-h{max-width:620px;margin:0 auto 14px}
+.cta-section .sec-p{margin:0 auto 40px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:13px 0;background:rgba(8,10,24,0.5);backdrop-filter:blur(10px)}
+.ticker-track{display:flex;width:max-content;animation:ticker 40s linear infinite}
+.ticker-item{padding:0 36px;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+
+/* FOOTER */
+footer{padding:44px 80px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;text-decoration:none;color:var(--white)}
+.footer-logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-copy{font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:22px}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--white)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+@media(max-width:1100px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .page-hero,.section,.cta-section,footer{padding-left:24px;padding-right:24px}
+  .story-grid,.approach-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .values-grid,.support-grid{grid-template-columns:1fr 1fr}
+  .numbers-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .team-grid,.values-grid,.support-grid,.numbers-row{grid-template-columns:1fr}
+  .page-h{letter-spacing:-1px}
+}
+</style>
+</head>
+<body>
+<canvas id="galaxy-canvas"></canvas>
+<div class="page-content">
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Build<span>Flow</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html" class="active">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="btn-nav-ghost">Login</a>
+    <a href="contact.html" class="btn-glow" style="font-size:13px;padding:10px 20px">Book A Call <svg class="arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero" style="animation:fadeUp .8s ease both">
+  <div class="location-pill"><span class="loc-dot"></span>Calgary, Alberta · Canada 🇨🇦</div>
+  <div class="eyebrow">Our Story</div>
+  <h1 class="page-h">Five People.<br>One <em>Mission.</em><br>Zero Missed Leads.</h1>
+  <p class="page-sub">We're a tight-knit team of designers, developers, and automation specialists based in Calgary — built from the ground up to help Canadian contractors grow their business with systems that actually work.</p>
+  <div class="hero-btns">
+    <a href="contact.html" class="btn-glow">Work With Us <svg class="arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="pricing.html" class="btn-ghost">View Pricing <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item">🏙 Calgary, AB</div><div class="ticker-item">🇨🇦 Canadian-Built</div><div class="ticker-item">⚙️ Web Design</div><div class="ticker-item">🤖 AI Automation</div><div class="ticker-item">📋 CRM Systems</div><div class="ticker-item">📞 Call Tracking</div><div class="ticker-item">💡 Built for Contractors</div><div class="ticker-item">🚀 Fast Setup</div>
+    <div class="ticker-item">🏙 Calgary, AB</div><div class="ticker-item">🇨🇦 Canadian-Built</div><div class="ticker-item">⚙️ Web Design</div><div class="ticker-item">🤖 AI Automation</div><div class="ticker-item">📋 CRM Systems</div><div class="ticker-item">📞 Call Tracking</div><div class="ticker-item">💡 Built for Contractors</div><div class="ticker-item">🚀 Fast Setup</div>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<section class="section">
+  <div class="numbers-row">
+    <div class="num-card reveal d1"><div class="num-val">5</div><div class="num-lbl">Specialists on the team — design, dev, AI, automation &amp; strategy</div></div>
+    <div class="num-card reveal d2"><div class="num-val">2022</div><div class="num-lbl">Founded in Calgary, Alberta — serving contractors across Canada</div></div>
+    <div class="num-card reveal d3"><div class="num-val">48h</div><div class="num-lbl">Average time from onboarding call to first live system</div></div>
+    <div class="num-card reveal d4"><div class="num-val">100%</div><div class="num-lbl">Focused on Home Services — no generalists, no off-the-shelf solutions</div></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="section alt">
+  <div class="story-grid">
+    <div class="story-text reveal">
+      <div class="sec-ey">How It Started</div>
+      <h2 class="sec-h">Born on a Job Site.<br>Built in Calgary.</h2>
+      <div style="margin-top:28px">
+        <p>It started with a simple observation. A roofing contractor in Calgary was losing <strong>three to four calls a day</strong> — not because he didn't want the work, but because he was on the roof when his phone rang. By the time he called back, the homeowner had already booked someone else.</p>
+        <p>We saw the same story repeated across dozens of contractors in Alberta. Talented, hardworking business owners — roofers, plumbers, electricians, HVAC techs — losing thousands of dollars every month not because of a lack of skill, but because of a <strong>broken system</strong> around how leads were captured and followed up.</p>
+        <p>So in 2022, five of us — a web designer, a developer, an AI engineer, an automation specialist, and a business strategist — came together in Calgary with one shared goal: <strong>build the system we wished these contractors already had.</strong></p>
+        <p>Not a website. Not a chatbot. Not a CRM that takes six months to learn. A <strong>complete, connected revenue system</strong> — designed specifically for the way contractors run their businesses — that works automatically, from the first call to the five-star review.</p>
+        <p>That's BuildFlow. And we're just getting started.</p>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="city-card">
+        <span class="city-skyline">🏙️</span>
+        <div class="city-name">Calgary, Alberta</div>
+        <div class="city-sub">Home of BuildFlow · Est. 2022</div>
+        <div class="city-stats">
+          <div class="cs"><div class="cs-num">AB</div><div class="cs-lbl">Province</div></div>
+          <div class="cs"><div class="cs-num">2022</div><div class="cs-lbl">Founded</div></div>
+          <div class="cs"><div class="cs-num">5</div><div class="cs-lbl">Team Members</div></div>
+          <div class="cs"><div class="cs-num">🇨🇦</div><div class="cs-lbl">Canada-Wide</div></div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="timeline" style="margin-top:36px">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2022 — The Idea</div>
+          <div class="tl-title">Saw the Problem Firsthand</div>
+          <div class="tl-desc">Working alongside Alberta contractors, we watched revenue disappear through missed calls and broken follow-up. We decided to fix it.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2023 — First Systems Built</div>
+          <div class="tl-title">The First 10 Clients</div>
+          <div class="tl-desc">We launched our first CRM + website packages for roofing and HVAC companies in Calgary. Response times dropped from days to minutes.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2024 — AI Integration</div>
+          <div class="tl-title">Added AI Voice &amp; Chat Agents</div>
+          <div class="tl-desc">We integrated AI calling and automation, turning the system into a fully autonomous lead-capture and follow-up engine.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2025 — Canada-Wide</div>
+          <div class="tl-title">Expanding Across Canada</div>
+          <div class="tl-desc">Now serving contractors in Alberta, BC, Ontario, and beyond — with the same personal attention we gave our very first client.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section">
+  <div class="ctr reveal">
+    <div class="sec-ey">The Team</div>
+    <h2 class="sec-h">Five Specialists.<br>One Connected Vision.</h2>
+    <p class="sec-p">Every person on our team was chosen for one reason: they're genuinely great at what they do — and they care about the businesses we serve.</p>
+  </div>
+  <div class="team-grid">
+    <div class="team-card reveal d1">
+      <div class="team-avatar">👨‍💼</div>
+      <div class="team-name">Alex M.</div>
+      <div class="team-role">Founder · Strategy</div>
+      <div class="team-bio">Former contractor-side consultant. Spent 4 years watching businesses lose revenue to bad systems. Built BuildFlow to fix that.</div>
+    </div>
+    <div class="team-card reveal d2">
+      <div class="team-avatar" style="background:var(--grad-r)">👩‍🎨</div>
+      <div class="team-name">Sarah K.</div>
+      <div class="team-role">Lead Designer</div>
+      <div class="team-bio">UX/UI specialist with 7 years in conversion-focused design. Every BuildFlow site is built to turn visitors into booked jobs.</div>
+    </div>
+    <div class="team-card reveal d3">
+      <div class="team-avatar" style="background:linear-gradient(135deg,#00cfff,#7b6fff)">👨‍💻</div>
+      <div class="team-name">Marcus T.</div>
+      <div class="team-role">Lead Developer</div>
+      <div class="team-bio">Full-stack developer specializing in CRM integrations and fast-loading contractor websites. If it's on your site, he built it right.</div>
+    </div>
+    <div class="team-card reveal d4">
+      <div class="team-avatar" style="background:linear-gradient(135deg,#6d3aff,#00cfff)">🤖</div>
+      <div class="team-name">Jordan R.</div>
+      <div class="team-role">AI &amp; Automation Engineer</div>
+      <div class="team-bio">Builds the AI voice agents, chat bots, and SMS automation sequences that keep your pipeline running 24/7 — even when you're off the clock.</div>
+    </div>
+    <div class="team-card reveal d5">
+      <div class="team-avatar" style="background:linear-gradient(135deg,#00e5a0,#4f8bff)">📊</div>
+      <div class="team-name">Priya N.</div>
+      <div class="team-role">Analytics &amp; Growth</div>
+      <div class="team-bio">Tracks every metric that matters — leads, close rates, revenue per source — so you always know your exact ROI from BuildFlow.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section alt">
+  <div class="ctr reveal">
+    <div class="sec-ey">What We Believe</div>
+    <h2 class="sec-h">Our Values</h2>
+    <p class="sec-p">These aren't just words on a wall. They're the reason every contractor we work with feels like a partner, not a client number.</p>
+  </div>
+  <div class="values-grid">
+    <div class="val-card reveal d1">
+      <span class="val-icon">🎯</span>
+      <div class="val-title">Clarity Over Complexity</div>
+      <div class="val-desc">We don't build complicated systems that need a manual to operate. Everything we create is simple, clear, and usable from day one — because you have a business to run, not a software course to take.</div>
+    </div>
+    <div class="val-card reveal d2">
+      <span class="val-icon">🤝</span>
+      <div class="val-title">Every Client is a Partnership</div>
+      <div class="val-desc">We don't disappear after launch. We treat every business we work with as a long-term relationship — learning your goals, your challenges, and building systems that grow as you grow.</div>
+    </div>
+    <div class="val-card reveal d3">
+      <span class="val-icon">📊</span>
+      <div class="val-title">Results Are the Only Metric</div>
+      <div class="val-desc">We're not here to impress you with fancy dashboards. We're here to put more money in your pocket. If our systems don't deliver measurable results, we work until they do.</div>
+    </div>
+    <div class="val-card reveal d1">
+      <span class="val-icon">⚡</span>
+      <div class="val-title">Speed Matters</div>
+      <div class="val-desc">Every day without a functioning system is a day you're losing leads. That's why we move fast — 24-hour automations, 2-week full setups. We understand that time is money in the trades.</div>
+    </div>
+    <div class="val-card reveal d2">
+      <span class="val-icon">🔗</span>
+      <div class="val-title">Everything Connected</div>
+      <div class="val-desc">We believe in building one integrated ecosystem, not a patchwork of disconnected tools. Website, CRM, phone, automation — all talking to each other, all working for you.</div>
+    </div>
+    <div class="val-card reveal d3">
+      <span class="val-icon">🇨🇦</span>
+      <div class="val-title">Built for Canadian Contractors</div>
+      <div class="val-desc">We understand Alberta winters, Canadian market conditions, and the way trade businesses operate here. This isn't a US template transplanted north — it's built for how you work.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="section">
+  <div class="approach-grid">
+    <div class="reveal">
+      <div class="sec-ey">How We Work</div>
+      <h2 class="sec-h">We Build Everything Around Your Business.</h2>
+      <p class="sec-p">No two contractors are the same. A roofing company in Calgary has different needs than an electrical contractor in Edmonton. We start by learning your business — not fitting you into a template.</p>
+      <div class="approach-steps">
+        <div class="ap-step">
+          <div class="ap-num">01</div>
+          <div><div class="ap-title">We Listen First</div><div class="ap-desc">Before we build anything, we spend time understanding your business — how leads come in, where you lose them, what your team looks like, and what you actually need to grow.</div></div>
+        </div>
+        <div class="ap-step">
+          <div class="ap-num">02</div>
+          <div><div class="ap-title">We Build to Fit</div><div class="ap-desc">Every website, every CRM workflow, every automation sequence is customized to your business. Not copy-pasted from a previous client. Yours.</div></div>
+        </div>
+        <div class="ap-step">
+          <div class="ap-num">03</div>
+          <div><div class="ap-title">We Train Your Team</div><div class="ap-desc">On launch day, we walk you and your team through everything — live. We don't send a help doc and disappear. You know how to use what we built.</div></div>
+        </div>
+        <div class="ap-step">
+          <div class="ap-num">04</div>
+          <div><div class="ap-title">We Stay With You</div><div class="ap-desc">Monthly check-ins, performance reviews, system updates, and direct access to our team — for as long as you need it. We're not a vendor. We're your growth partner.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="approach-visual reveal d2">
+      <div class="av-card"><div class="av-icon">📞</div><div><div class="av-title">Free Strategy Call</div><div class="av-desc">We audit your current setup and identify exactly where revenue is leaking</div></div></div>
+      <div class="av-card"><div class="av-icon">📝</div><div><div class="av-title">Custom Proposal</div><div class="av-desc">You receive a tailored system plan — with clear pricing, timeline, and expected results</div></div></div>
+      <div class="av-card"><div class="av-icon">⚙️</div><div><div class="av-title">We Build Everything</div><div class="av-desc">Website, CRM, AI agents, automations — fully set up and tested before we hand it over</div></div></div>
+      <div class="av-card"><div class="av-icon">🚀</div><div><div class="av-title">Go Live in 48–72 Hours</div><div class="av-desc">Your system is live, your team is trained, and leads start flowing automatically</div></div></div>
+      <div class="av-card"><div class="av-icon">📈</div><div><div class="av-title">Monthly Optimization</div><div class="av-desc">We review performance, tweak automations, and keep improving your results every month</div></div></div>
+      <div class="av-card"><div class="av-icon">🤝</div><div><div class="av-title">Ongoing Partnership</div><div class="av-desc">Direct access to our team, priority support, and a partner who grows with your business</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="section alt">
+  <div class="ctr reveal">
+    <div class="sec-ey">Our Support</div>
+    <h2 class="sec-h">We're With You<br>For the Long Haul.</h2>
+    <p class="sec-p">We don't measure success by the launch date. We measure it by how your business is performing six months, one year, two years down the road. That's why our support never has an expiry date.</p>
+  </div>
+  <div class="support-grid">
+    <div class="sup-card reveal d1">
+      <div class="sup-icon">💬</div>
+      <div class="sup-title">Direct Access to Your Team</div>
+      <div class="sup-desc">You're not talking to a helpdesk bot or a ticket system. You have a direct line to the people who built your system — people who know your business and can actually fix things.</div>
+      <div class="sup-tag"><span>●</span> Always Available</div>
+    </div>
+    <div class="sup-card reveal d2">
+      <div class="sup-icon">🔄</div>
+      <div class="sup-title">Monthly System Reviews</div>
+      <div class="sup-desc">Every month we review your lead flow, automation performance, and close rates together. We identify what's working, what needs adjusting, and what to add next to keep your growth on track.</div>
+      <div class="sup-tag"><span>●</span> Proactive, Not Reactive</div>
+    </div>
+    <div class="sup-card reveal d3">
+      <div class="sup-icon">🛡</div>
+      <div class="sup-title">We Grow With You</div>
+      <div class="sup-desc">As your business expands — more crew members, more locations, more services — your BuildFlow system expands with you. We add features, scale automations, and adapt everything to your new reality.</div>
+      <div class="sup-tag"><span>●</span> No Extra Onboarding Fee</div>
+    </div>
+  </div>
+
+  <!-- SUPPORT PROMISE -->
+  <div style="margin-top:32px;background:rgba(123,111,255,0.06);border:1px solid rgba(123,111,255,0.2);border-radius:18px;padding:36px 40px;display:flex;align-items:center;gap:32px;flex-wrap:wrap" class="reveal d1">
+    <div style="font-size:48px;flex-shrink:0">🤝</div>
+    <div style="flex:1;min-width:260px">
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px">Our Promise to You</div>
+      <div style="font-size:15px;color:var(--muted);line-height:1.8">If your system ever breaks, stops performing, or needs updating — we fix it. No extra charge, no waiting in a queue. We built it, we own it, and we make sure it works — for as long as you're with BuildFlow.</div>
+    </div>
+    <a href="contact.html" class="btn-glow" style="flex-shrink:0">Start the Conversation <svg class="arrow" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="eyebrow">Let's Work Together</div>
+  <h2 class="sec-h ctr">Ready to Meet the Team?</h2>
+  <p class="sec-p ctr">Book a free 30-minute call with us. We'll learn about your business, show you exactly where you're losing revenue, and walk you through what a BuildFlow system would look like for you — no pressure, just an honest conversation.</p>
+  <div class="cta-btns">
+    <a href="contact.html" class="btn-glow">Book A Free Strategy Call <svg class="arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="services.html" class="btn-ghost">Explore Our Services <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">Build<span>Flow</span></a>
+  <div class="footer-copy">© 2025 BuildFlow Systems Inc. Built for Canadian contractors.</div>
+  <div class="footer-links">
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+/* GALAXY */
+(function(){
+  const canvas=document.getElementById('galaxy-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[],nebula=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+  function init(){
+    stars=[];
+    for(let i=0;i<300;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+0.3,a:Math.random(),tw:Math.random()*.02+.005,dir:Math.random()>.5?1:-1});
+    nebula=[];
+    const cols=['rgba(80,50,180,','rgba(40,100,200,','rgba(100,40,180,','rgba(20,80,160,','rgba(60,20,140,','rgba(0,100,180,'];
+    for(let i=0;i<8;i++) nebula.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*280+120,c:cols[Math.floor(Math.random()*cols.length)],a:Math.random()*.18+.06});
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(W*.5,H*.35,0,W*.5,H*.35,Math.max(W,H)*.9);
+    bg.addColorStop(0,'#0e1035');bg.addColorStop(.4,'#080a1e');bg.addColorStop(1,'#03040d');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    nebula.forEach(n=>{const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r);g.addColorStop(0,n.c+n.a+')');g.addColorStop(1,n.c+'0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fill()});
+    ctx.save();ctx.translate(W*.72,H*.28);
+    for(let arm=0;arm<3;arm++){const ao=(arm/3)*Math.PI*2;for(let i=0;i<80;i++){const t=i/80,angle=t*Math.PI*3+ao,dist=t*200+10,sx=Math.cos(angle)*dist+(Math.random()-.5)*28,sy=Math.sin(angle)*dist*.45+(Math.random()-.5)*18;ctx.beginPath();ctx.arc(sx,sy,Math.random()*1.2+.3,0,Math.PI*2);ctx.fillStyle=`rgba(180,160,255,${(1-t)*.22})`;ctx.fill()}}
+    const cg=ctx.createRadialGradient(0,0,0,0,0,70);cg.addColorStop(0,'rgba(200,180,255,0.18)');cg.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=cg;ctx.beginPath();ctx.arc(0,0,160,0,Math.PI*2);ctx.fill();
+    ctx.restore();
+    stars.forEach(s=>{s.a+=s.tw*s.dir;if(s.a>1||s.a<.1)s.dir*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(220,225,255,${s.a*.9})`;ctx.fill();if(s.r>1.2){const sg=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5);sg.addColorStop(0,`rgba(180,190,255,${s.a*.12})`);sg.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=sg;ctx.beginPath();ctx.arc(s.x,s.y,s.r*5,0,Math.PI*2);ctx.fill()}});
+    requestAnimationFrame(draw);
+  }
+  resize();init();draw();
+  window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* REVEAL */
+const rev=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.08});
+rev.forEach(r=>io.observe(r));
+</script>
+</body>
+</html>
