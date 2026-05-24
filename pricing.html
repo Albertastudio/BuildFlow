@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pricing — BuildFlow</title>
+<meta name="description" content="Simple, transparent pricing for BuildFlow's contractor automation systems — AI Voice Agents, CRM, websites, and more."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="favicon.svg"/>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="page-content">
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Build<span>Flow</span><span class="logo-sub">by Alberta Studio</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="login.html" class="btn-nav-login">Login</a>
+    <a href="#cta" class="btn-glow" style="font-size:13px;padding:10px 20px">Book A Call <svg class="arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero" style="animation:fadeUp .8s ease both">
+  <div class="eyebrow">Pricing</div>
+  <h1 class="page-h">Simple, <em>Transparent</em> Pricing</h1>
+  <p class="page-sub">No hidden fees. No long-term lock-ins. Pick exactly what your business needs — and scale up when you're ready.</p>
+  <div class="guarantee-badge">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    30-Day Satisfaction Guarantee · Cancel Anytime
+  </div>
+
+  <!-- BILLING TOGGLE -->
+  <div class="billing-toggle" id="billingToggle" style="margin-top:32px">
+    <span>Monthly</span>
+    <div class="toggle-track" id="toggleTrack" onclick="toggleBilling()">
+      <div class="toggle-thumb"></div>
+    </div>
+    <span>Annual</span>
+    <span class="save-badge">Save 20%</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item">📞 AI Voice Agent</div><div class="ticker-item">🤖 Chat Automation</div><div class="ticker-item">⭐ Review Automation</div><div class="ticker-item">🌐 Website Design</div><div class="ticker-item">📋 CRM Setup</div><div class="ticker-item">📍 Google Profile</div><div class="ticker-item">📊 Analytics</div><div class="ticker-item">🗄️ Hosting</div>
+    <div class="ticker-item">📞 AI Voice Agent</div><div class="ticker-item">🤖 Chat Automation</div><div class="ticker-item">⭐ Review Automation</div><div class="ticker-item">🌐 Website Design</div><div class="ticker-item">📋 CRM Setup</div><div class="ticker-item">📍 Google Profile</div><div class="ticker-item">📊 Analytics</div><div class="ticker-item">🗄️ Hosting</div>
+  </div>
+</div>
+
+<!-- ══ PLATFORM SOFTWARE ══ -->
+<section class="section" id="platform">
+  <div class="ctr reveal">
+    <div class="sec-ey">Platform Software</div>
+    <h2 class="sec-h">Choose Your BuildFlow Plan</h2>
+    <p class="sec-p">Our core software platform — everything you need to manage leads, automate follow-up, and grow your contracting business.</p>
+  </div>
+  <div class="plans-grid">
+
+    <div class="plan-card reveal d1">
+      <div class="plan-name">Starter</div>
+      <div class="plan-tagline">Basic automation to stop losing leads and get organized.</div>
+      <div class="plan-price-wrap">
+        <div class="plan-price" data-monthly="197" data-annual="158">$197</div>
+      </div>
+      <div class="plan-per">/ month</div>
+      <div class="plan-annual" id="starterAnnual"></div>
+      <div class="plan-divider"></div>
+      <div class="plan-feats">
+        <div class="pf"><div class="pf-check">✓</div><span>CRM with lead pipeline</span></div>
+        <div class="pf"><div class="pf-check">✓</div><span>Missed call text-back automation</span></div>
+        <div class="pf"><div class="pf-check">✓</div><span>Basic SMS &amp; email follow-up</span></div>
+        <div class="pf"><div class="pf-check">✓</div><span>Unified conversation inbox</span></div>
+        <div class="pf"><div class="pf-check">✓</div><span>Mobile app included</span></div>
+        <div class="pf"><div class="pf-check">✓</div><span>Up to 3 users</span></div>
+        <div class="pf" style="opacity:.4"><div class="pf-check">—</div><span>AI Voice Agent</span></div>
+        <div class="pf" style="opacity:.4"><div class="pf-check">—</div><span>Review automation</span></div>
+      </div>
+      <a href="#cta" class="btn-ghost btn-full">Get Started <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="plan-card featured reveal d2">
+      <div class="plan-name">Professional</div>
+      <div class="plan-tagline">Full AI-powered system built to close more jobs every month.</div>
+      <div class="plan-price-wrap">
+        <div class="plan-price" data-monthly="997" data-annual="798">$997</div>
+      </div>
+      <div class="plan-per">/ month</div>
+      <div class="plan-annual" id="proAnnual"></div>
+      <div class="plan-divider"></div>
+      <div class="plan-feats">
+        <div class="pf"><div class="pf-check green">✓</div><span>Everything in Starter</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>AI Voice Agent (24/7 call answering)</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>AI Chat Agent &amp; website bot</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Review automation (Google &amp; Facebook)</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Full analytics &amp; reporting dashboard</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Sales pipeline &amp; job scheduling</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Advanced SMS &amp; email sequences</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Unlimited users</span></div>
+      </div>
+      <a href="#cta" class="btn-glow btn-full">Get Started <svg class="arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="plan-card reveal d3">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-tagline">Custom workflows and integrations for multi-location businesses.</div>
+      <div class="plan-price-wrap">
+        <div class="plan-price custom">Custom</div>
+      </div>
+      <div class="plan-per">tailored quote</div>
+      <div class="plan-annual"></div>
+      <div class="plan-divider"></div>
+      <div class="plan-feats">
+        <div class="pf"><div class="pf-check green">✓</div><span>Everything in Professional</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Multi-location support</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Custom AI workflows &amp; automations</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Dedicated account manager</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Priority onboarding &amp; training</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Custom integrations (ERP, invoicing)</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>SLA &amp; uptime guarantee</span></div>
+        <div class="pf"><div class="pf-check green">✓</div><span>Monthly strategy calls</span></div>
+      </div>
+      <a href="#cta" class="btn-ghost btn-full">Talk to Sales <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ AI SERVICES ══ -->
+<section class="section alt" id="ai-services">
+  <div class="ctr reveal">
+    <div class="sec-ey">AI Services</div>
+    <h2 class="sec-h">Standalone AI Tools</h2>
+    <p class="sec-p">Add individual AI services to any plan — or use them as standalone subscriptions.</p>
+  </div>
+  <div class="ai-grid">
+
+    <div class="ai-card reveal d1">
+      <div class="ai-icon">📞</div>
+      <div class="ai-name">AI Voice Agent &amp; Receptionist</div>
+      <div class="ai-price-row"><div class="ai-price">$400</div><div class="ai-per">/ month</div></div>
+      <div class="ai-desc">Your 24/7 virtual receptionist — answers every call, qualifies leads, and books appointments while you're on the job site or asleep.</div>
+      <div class="ai-feats">
+        <div class="af">Automatic call answering &amp; routing</div>
+        <div class="af">Lead qualification &amp; appointment booking</div>
+        <div class="af">Voicemail recording &amp; transcription</div>
+        <div class="af">Custom scripts &amp; greetings</div>
+        <div class="af">CRM &amp; calendar integration</div>
+      </div>
+      <a href="#cta" class="btn-glow btn-full" style="font-size:14px;padding:12px 20px">Add to Plan <svg class="arrow" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="ai-card reveal d2">
+      <div class="ai-icon">🤖</div>
+      <div class="ai-name">AI Chat Agent &amp; Website Bot</div>
+      <div class="ai-price-row"><div class="ai-price">$147</div><div class="ai-per">/ month</div></div>
+      <div class="ai-desc">A smart chatbot that lives on your website — engages visitors 24/7, captures lead info, and sends everything straight to your CRM.</div>
+      <div class="ai-feats">
+        <div class="af">Real-time visitor chat &amp; qualification</div>
+        <div class="af">Automatic lead capture &amp; CRM sync</div>
+        <div class="af">Smart notifications &amp; tagging</div>
+        <div class="af">Chat analytics dashboard</div>
+        <div class="af">Custom branding &amp; tone</div>
+      </div>
+      <a href="#cta" class="btn-glow btn-full" style="font-size:14px;padding:12px 20px">Add to Plan <svg class="arrow" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="ai-card reveal d3">
+      <div class="ai-icon">⭐</div>
+      <div class="ai-name">Review Automation &amp; Reputation</div>
+      <div class="ai-price-row"><div class="ai-price">$197</div><div class="ai-per">/ month</div></div>
+      <div class="ai-desc">Automatically request reviews after every job, filter negative feedback, and build a 5-star Google reputation — completely on autopilot.</div>
+      <div class="ai-feats">
+        <div class="af">Automated SMS &amp; email review requests</div>
+        <div class="af">Google &amp; Facebook review links</div>
+        <div class="af">Negative feedback interception</div>
+        <div class="af">Centralized reputation dashboard</div>
+        <div class="af">Testimonial collection for website</div>
+      </div>
+      <a href="#cta" class="btn-glow btn-full" style="font-size:14px;padding:12px 20px">Add to Plan <svg class="arrow" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ WEBSITE PACKAGES ══ -->
+<section class="section" id="websites">
+  <div class="ctr reveal">
+    <div class="sec-ey">Website Design</div>
+    <h2 class="sec-h">Website Packages</h2>
+    <p class="sec-p">High-converting contractor websites — designed to turn visitors into booked jobs. One-time build fee, then your choice of hosting plan.</p>
+  </div>
+  <div class="web-grid">
+
+    <div class="web-card reveal d1">
+      <div class="web-type">Starter</div>
+      <div class="web-name">Starter Website</div>
+      <div class="web-price-row"><div class="web-price">$499</div></div>
+      <div class="web-note">One-time · Up to 3 pages</div>
+      <div class="web-feats">
+        <div class="wf">Up to 3 pages (Home, About, Contact)</div>
+        <div class="wf">Mobile-first responsive design</div>
+        <div class="wf">Basic SEO (meta tags, headings)</div>
+        <div class="wf">Contact form &amp; Google Maps</div>
+        <div class="wf">SSL certificate setup</div>
+      </div>
+      <a href="#cta" class="btn-ghost btn-full" style="font-size:14px;padding:12px 20px">Get This Package <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="web-card featured reveal d2">
+      <div class="web-badge">Most Popular</div>
+      <div class="web-type">Professional</div>
+      <div class="web-name">Professional Website</div>
+      <div class="web-price-row"><div class="web-price">$899</div></div>
+      <div class="web-note">One-time · 4–6 pages</div>
+      <div class="web-feats">
+        <div class="wf">4–6 pages with custom layout</div>
+        <div class="wf">Portfolio &amp; photo gallery</div>
+        <div class="wf">Calendar &amp; booking integration</div>
+        <div class="wf">Advanced SEO &amp; speed optimization</div>
+        <div class="wf">CRM form integration</div>
+        <div class="wf">Google Analytics setup</div>
+      </div>
+      <a href="#cta" class="btn-glow btn-full" style="font-size:14px;padding:12px 20px">Get This Package <svg class="arrow" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="web-card reveal d3">
+      <div class="web-type">Enterprise</div>
+      <div class="web-name">Enterprise Website</div>
+      <div class="web-price-row"><div class="web-price custom">Custom</div></div>
+      <div class="web-note">One-time · 7–10+ pages</div>
+      <div class="web-feats">
+        <div class="wf">7–10+ pages with advanced UX/UI</div>
+        <div class="wf">Blog, testimonials, custom forms</div>
+        <div class="wf">AI chatbot integration</div>
+        <div class="wf">Multi-location support</div>
+        <div class="wf">Full CRM &amp; automation integration</div>
+        <div class="wf">Priority build timeline</div>
+      </div>
+      <a href="#cta" class="btn-ghost btn-full" style="font-size:14px;padding:12px 20px">Request a Quote <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+  </div>
+
+  <!-- HOSTING -->
+  <div style="margin-top:48px">
+    <div class="ctr reveal">
+      <div class="sec-ey">Hosting</div>
+      <h2 class="sec-h" style="font-size:clamp(22px,2.5vw,32px)">Hosting Plans</h2>
+      <p class="sec-p" style="font-size:14px">All plans include SSL, domain management, and monthly backups.</p>
+    </div>
+    <div class="hosting-grid reveal d1">
+      <div class="host-card">
+        <div class="host-name">Basic Hosting</div>
+        <div class="host-price">$20</div>
+        <div class="host-per">/ month</div>
+        <div class="host-feats">
+          <div class="hf">SSL certificate included</div>
+          <div class="hf">Monthly automated backups</div>
+          <div class="hf">Standard server speed</div>
+          <div class="hf">Email support</div>
+        </div>
+      </div>
+      <div class="host-card" style="border-color:rgba(123,111,255,0.3)">
+        <div class="host-name">Professional Hosting</div>
+        <div class="host-price">$50</div>
+        <div class="host-per">/ month</div>
+        <div class="host-feats">
+          <div class="hf">Everything in Basic</div>
+          <div class="hf">Accelerated server (faster load)</div>
+          <div class="hf">Priority support response</div>
+          <div class="hf">Weekly backups</div>
+        </div>
+      </div>
+      <div class="host-card">
+        <div class="host-name">Enterprise Hosting</div>
+        <div class="host-price">$99</div>
+        <div class="host-per">/ month</div>
+        <div class="host-feats">
+          <div class="hf">Everything in Professional</div>
+          <div class="hf">Daily automated backups</div>
+          <div class="hf">Advanced security monitoring</div>
+          <div class="hf">Dedicated support line</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADD-ONS ══ -->
+<section class="section alt" id="addons">
+  <div class="reveal">
+    <div class="sec-ey">Add-On Services</div>
+    <h2 class="sec-h">Additional Services</h2>
+    <p class="sec-p">Available individually or as part of a custom bundle. All prices are fixed — no surprises.</p>
+  </div>
+  <div class="addons-grid reveal d1">
+    <div class="addon-row">
+      <div class="addon-left">
+        <div class="addon-icon">📍</div>
+        <div><div class="addon-name">Google Business Profile Setup &amp; Optimization</div><div class="addon-desc">Full GBP setup, keyword optimization, photo upload &amp; local ranking</div></div>
+      </div>
+      <div><div class="addon-price">$297</div><div class="addon-freq">one-time</div></div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-left">
+        <div class="addon-icon">🎨</div>
+        <div><div class="addon-name">Logo Design &amp; Business Branding</div><div class="addon-desc">Professional logo &amp; visual identity package</div></div>
+      </div>
+      <div><div class="addon-price">$147</div><div class="addon-freq">one-time</div></div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-left">
+        <div class="addon-icon">🎬</div>
+        <div><div class="addon-name">Content Creation + Post-Ready Editing</div><div class="addon-desc">Before/after photo &amp; video editing for Instagram, TikTok &amp; YouTube Shorts</div></div>
+      </div>
+      <div><div class="addon-price">$397</div><div class="addon-freq">/ month</div></div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-left">
+        <div class="addon-icon">📱</div>
+        <div><div class="addon-name">Complete Social Media Management</div><div class="addon-desc">Posts, strategy, scheduling &amp; monthly performance reporting</div></div>
+      </div>
+      <div><div class="addon-price">$747</div><div class="addon-freq">/ month</div></div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-left">
+        <div class="addon-icon">📊</div>
+        <div><div class="addon-name">Google &amp; Meta Ads Management</div><div class="addon-desc">Full ad campaign management — strategy, setup, optimization &amp; reporting</div></div>
+      </div>
+      <div><div class="addon-price">Custom</div><div class="addon-freq">/ month</div></div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-left">
+        <div class="addon-icon">🛠</div>
+        <div><div class="addon-name">Ongoing Support &amp; Optimization</div><div class="addon-desc">Monthly system reviews, updates &amp; direct priority support</div></div>
+      </div>
+      <div><div class="addon-price">Included</div><div class="addon-freq">in Pro &amp; Enterprise</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section" id="faq">
+  <div class="ctr reveal">
+    <div class="sec-ey">FAQ</div>
+    <h2 class="sec-h">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-list reveal d1">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do I need to sign a long-term contract?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">No. All monthly plans are month-to-month — you can cancel anytime without penalty. Annual plans are billed upfront and save you 20%.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How long does setup take?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Missed call text-back and basic CRM can be live within 24 hours. A full system setup (website + CRM + AI agent + automations) typically takes 7–14 days depending on complexity.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I add services later?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Absolutely. You can start with the Starter plan or just a website and add AI services, automation, or add-ons at any time. Everything is modular and connects together.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do you work with contractors outside Alberta?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Yes — we work with contractors across Canada. Our systems are built for any province or territory. We also serve US-based contractors on request.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What's included in the free strategy call?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">A 30-minute call where we audit your current lead flow, identify where you're losing money, and walk you through which BuildFlow services would have the biggest impact for your specific business — no pressure, no pitch deck.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is the website one-time or recurring?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">The website build is a one-time fee. Hosting is a separate monthly subscription (starting at $20/month) which covers SSL, backups, and server maintenance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="eyebrow">Get Started</div>
+  <h2 class="sec-h ctr">Not Sure Which Plan is Right for You?</h2>
+  <p class="sec-p ctr">Book a free 30-minute strategy call. We'll look at your business, your current setup, and build a custom recommendation — no obligation.</p>
+  <div class="cta-btns">
+    <a href="contact.html?type=strategy" class="btn-glow">Book A Free Consultation <svg class="arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="services.html" class="btn-ghost">View All Services <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">Build<span>Flow</span><span class="logo-sub">by Alberta Studio</span></a>
+  <div class="footer-copy">© 2025 Alberta Studio. BuildFlow is a division of Alberta Studio. Calgary, Alberta.</div>
+  <div class="footer-links">
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+</div><!-- end page-content -->
+
+<script>
+/* REVEAL */
+const rev=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.08});
+rev.forEach(r=>io.observe(r));
+
+/* BILLING TOGGLE */
+let isAnnual=false;
+function toggleBilling(){
+  isAnnual=!isAnnual;
+  document.getElementById('toggleTrack').classList.toggle('on',isAnnual);
+  const prices=document.querySelectorAll('.plan-price[data-monthly]');
+  prices.forEach(p=>{
+    const m=parseInt(p.dataset.monthly);
+    const a=parseInt(p.dataset.annual);
+    p.textContent='$'+(isAnnual?a:m);
+  });
+  document.getElementById('starterAnnual').textContent=isAnnual?'Billed $1,896/yr — save $468':'';
+  document.getElementById('proAnnual').textContent=isAnnual?'Billed $9,576/yr — save $2,388':'';
+}
+
+/* FAQ ACCORDION */
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

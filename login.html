@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Client Portal — BuildFlow</title>
+<meta name="description" content="Access your BuildFlow contractor command center, monitor your AI Voice Agent logs, track active leads, and configure follow-up CRM automations."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="favicon.svg"/>
+<link rel="stylesheet" href="styles.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05060f;--bg2:#080a18;
+  --border:rgba(255,255,255,0.08);
+  --white:#eef0ff;--muted:#8b90b8;
+  --accent:#7b6fff;--accent2:#00cfff;
+  --green:#00e5a0;
+  --grad:linear-gradient(135deg,#7b6fff 0%,#00cfff 100%);
+  --grad-r:linear-gradient(135deg,#00cfff 0%,#7b6fff 100%);
+  --error:#ff6b6b;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+.bg-grid{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-color:var(--bg);background-image:radial-gradient(at 0% 0%,rgba(123,111,255,0.12) 0px,transparent 50%),radial-gradient(at 100% 0%,rgba(0,207,255,0.09) 0px,transparent 50%),radial-gradient(at 50% 100%,rgba(5,6,15,0.4) 0px,transparent 50%),linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);background-size:100% 100%,100% 100%,100% 100%,50px 50px,50px 50px}
+.page-content{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;flex:1}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 60px;background:rgba(5,6,15,0.78);backdrop-filter:blur(20px);border-bottom:1px solid rgba(123,111,255,0.15)}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;text-decoration:none;letter-spacing:-0.5px;color:var(--white);display:flex;align-items:center}
+.logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-size:9px;font-weight:600;color:var(--muted);margin-left:10px;border-left:1px solid rgba(255,255,255,0.15);padding-left:10px;text-transform:uppercase;letter-spacing:1px}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:8px 16px;border-radius:8px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:rgba(255,255,255,0.06)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.btn-nav-login,.btn-nav-ghost{color:var(--muted);font-size:14px;font-weight:500;text-decoration:none;padding:8px 16px;border-radius:8px;border:1px solid var(--border);transition:color .2s,border-color .2s}
+.btn-nav-login:hover,.btn-nav-login.active,.btn-nav-ghost:hover,.btn-nav-ghost.active{color:var(--white);border-color:rgba(123,111,255,0.4);background:rgba(255,255,255,0.04)}
+.btn-glow{display:inline-flex;align-items:center;gap:9px;background:var(--grad);color:#fff;font-weight:700;font-size:13px;padding:10px 20px;border-radius:10px;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(123,111,255,0.55)}
+
+/* ── MAIN LAYOUT ── */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:120px 40px 60px;position:relative;z-index:2}
+
+/* ── LOGIN CARD ── */
+.login-container{width:100%;max-width:460px;animation:fadeUp .6s ease both}
+.login-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:24px;padding:48px 40px;backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,0.6);position:relative;overflow:hidden}
+.login-card::before{content:'';position:absolute;top:-150px;right:-150px;width:300px;height:300px;background:radial-gradient(circle,rgba(123,111,255,0.12),transparent 70%);pointer-events:none}
+.login-header{text-align:center;margin-bottom:36px}
+.login-header h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:8px}
+.login-header h1 span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.login-header p{font-size:14px;color:var(--muted)}
+.form-group{margin-bottom:20px;position:relative}
+.form-label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px}
+.form-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px 16px;color:var(--white);font-family:inherit;font-size:14px;transition:border-color .25s,box-shadow .25s}
+.form-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 12px rgba(123,111,255,0.25);background:rgba(255,255,255,0.06)}
+.form-input.error{border-color:var(--error)}
+.field-error{font-size:12px;color:var(--error);margin-top:6px;display:none}
+.field-error.show{display:block}
+.login-options{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;font-size:13px}
+.remember-me{display:flex;align-items:center;gap:8px;color:var(--muted);cursor:pointer}
+.forgot-pass{color:var(--accent2);text-decoration:none;font-weight:600;transition:color .2s}
+.forgot-pass:hover{color:var(--white)}
+.btn-submit{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--grad);color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(123,111,255,0.45)}
+.btn-submit:active{transform:scale(0.99)}
+.login-footer{text-align:center;margin-top:32px;font-size:13px;color:var(--muted)}
+.login-footer a{color:var(--accent2);text-decoration:none;font-weight:600;transition:color .2s}
+.login-footer a:hover{color:var(--white)}
+
+/* ── LOADING SCREEN ── */
+.loader-container{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;animation:fadeIn .5s ease both}
+.galaxy-spinner{width:80px;height:80px;position:relative;margin-bottom:24px}
+.spinner-ring{position:absolute;inset:0;border:3px solid transparent;border-top-color:var(--accent);border-radius:50%;animation:spin 1.2s linear infinite}
+.spinner-ring.two{inset:8px;border-top-color:var(--accent2);animation:spin 0.8s linear infinite reverse}
+.spinner-ring.three{inset:16px;border-top-color:var(--green);animation:spin 1.8s linear infinite}
+.loader-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px}
+.loader-status{font-size:14px;color:var(--muted);min-height:22px}
+
+/* ── COMMAND CENTER DASHBOARD ── */
+.dashboard-container{display:none;width:100%;max-width:1200px;animation:fadeUp .6s ease both}
+.dash-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:24px;overflow:hidden;backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,0.6);display:grid;grid-template-columns:240px 1fr}
+.dash-sidebar{background:rgba(8,10,24,0.5);border-right:1px solid var(--border);padding:32px 20px;display:flex;flex-direction:column;gap:32px}
+.ds-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;text-decoration:none;color:var(--white);padding-left:12px}
+.ds-logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ds-menu{display:flex;flex-direction:column;gap:8px;list-style:none}
+.ds-item{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px;font-weight:600;padding:12px 16px;border-radius:10px;cursor:pointer;transition:color .2s,background .2s}
+.ds-item:hover,.ds-item.active{color:var(--white);background:rgba(255,255,255,0.06)}
+.ds-item.active{background:rgba(123,111,255,0.15);border:1px solid rgba(123,111,255,0.25);color:#fff}
+.ds-icon{font-size:16px}
+.ds-profile{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px}
+.dp-avatar{width:36px;height:36px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.dp-info{flex:1;overflow:hidden}
+.dp-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dp-role{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
+
+.dash-main{padding:40px;display:flex;flex-direction:column;gap:32px;max-height:85vh;overflow-y:auto}
+.dash-header{display:flex;justify-content:space-between;align-items:center}
+.dh-title h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px}
+.dh-title p{font-size:13px;color:var(--muted)}
+.dh-actions{display:flex;align-items:center;gap:14px}
+.status-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.25);color:var(--green);font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 2s infinite}
+
+/* Stats Grid */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:22px;transition:transform .2s,border-color .2s}
+.stat-card:hover{transform:translateY(-2px);border-color:rgba(123,111,255,0.2)}
+.sc-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
+.sc-value{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin:6px 0 4px}
+.sc-change{font-size:11px;font-weight:600;display:flex;align-items:center;gap:4px}
+.sc-change.up{color:var(--green)}
+.sc-change.neutral{color:var(--muted)}
+
+/* Tab contents */
+.tab-content{display:none}
+.tab-content.active{display:flex;flex-direction:column;gap:24px}
+
+/* Lead Stream */
+.lead-list{display:flex;flex-direction:column;gap:12px}
+.lead-item{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;transition:border-color .2s,background .2s}
+.lead-item:hover{border-color:rgba(123,111,255,0.2);background:rgba(255,255,255,0.04)}
+.li-left{display:flex;align-items:center;gap:16px}
+.li-icon{width:40px;height:40px;border-radius:10px;background:rgba(123,111,255,0.08);border:1px solid rgba(123,111,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px}
+.li-details{display:flex;flex-direction:column}
+.li-name{font-weight:700;font-size:15px}
+.li-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.li-meta span{color:var(--accent2);font-weight:600}
+.li-status-col{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.li-time{font-size:11px;color:var(--muted)}
+.badge-pill{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;text-transform:uppercase}
+.badge-pill.qualified{background:rgba(0,229,160,0.1);color:var(--green);border:1px solid rgba(0,229,160,0.2)}
+.badge-pill.text-back{background:rgba(0,207,255,0.1);color:var(--accent2);border:1px solid rgba(0,207,255,0.2)}
+.badge-pill.new{background:rgba(123,111,255,0.1);color:var(--accent);border:1px solid rgba(123,111,255,0.2)}
+
+/* Voice Logs */
+.log-item{background:rgba(255,255,255,0.01);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.log-header{display:flex;justify-content:space-between;align-items:center}
+.log-caller{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+.btn-listen{background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--white);font-weight:600;font-size:12px;padding:8px 14px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s,border-color .2s}
+.btn-listen:hover{background:rgba(123,111,255,0.12);border-color:rgba(123,111,255,0.3)}
+.log-transcript{font-size:13px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.03);border-radius:8px;padding:14px;max-height:160px;overflow-y:auto;display:none}
+.tr-row{margin-bottom:8px}
+.tr-row:last-child{margin-bottom:0}
+.tr-spk{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
+.tr-spk.ai{color:var(--accent2)}
+.tr-spk.caller{color:#fff}
+.tr-txt{color:var(--muted)}
+
+/* Automation Canvas Flow Chart (simulated) */
+.flow-chart{display:flex;flex-direction:column;align-items:center;gap:20px;padding:20px 0}
+.flow-node{width:240px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;position:relative}
+.flow-node::after{content:'↓';position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:16px;color:var(--accent2)}
+.flow-node:last-child::after{display:none}
+.flow-node-title{font-weight:700;font-size:13px}
+.flow-node-desc{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* Settings fields */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.settings-card{background:rgba(255,255,255,0.01);border:1px solid var(--border);border-radius:16px;padding:28px}
+.settings-title{font-weight:700;font-size:16px;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:10px}
+
+/* Footer override */
+footer{height:60px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--border);margin-top:auto;font-size:12px;color:var(--muted);background:rgba(5,6,15,0.9);position:relative;z-index:3}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+@media(max-width:1100px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .dash-card{grid-template-columns:1fr}
+  .dash-sidebar{border-right:none;border-bottom:1px solid var(--border);flex-direction:row;flex-wrap:wrap;padding:20px}
+  .ds-profile{width:100%}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  main{padding-left:16px;padding-right:16px}
+  .login-card{padding:32px 24px}
+  .stats-grid{grid-template-columns:1fr}
+  .dash-main{padding:20px}
+  .dh-actions{display:none}
+  .lead-item{flex-direction:column;align-items:flex-start;gap:12px}
+  .li-status-col{align-items:flex-start;text-align:left}
+  .settings-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="page-content" id="pageContent">
+
+  <!-- NAV -->
+  <nav id="navBar">
+    <a href="index.html" class="logo">Build<span>Flow</span><span class="logo-sub">by Alberta Studio</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="login.html" class="btn-nav-login active">Login</a>
+      <a href="contact.html?type=strategy" class="btn-glow" style="font-size:13px;padding:10px 20px">Book A Call <svg class="arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </nav>
+
+  <!-- MAIN SECTION -->
+  <main>
+    
+    <!-- LOGIN SCREEN -->
+    <div class="login-container" id="loginScreen">
+      <div class="login-card">
+        <div class="login-header">
+          <h1>Welcome to <span>BuildFlow</span></h1>
+          <p>Sign in to manage your contractor command center</p>
+        </div>
+        
+        <form id="loginForm" onsubmit="event.preventDefault(); handleLogin();">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email Address</label>
+            <input class="form-input" type="email" id="loginEmail" placeholder="admin@structuralprecast.ca" required/>
+            <span class="field-error" id="emailErr">Please enter a valid email</span>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input class="form-input" type="password" id="loginPassword" placeholder="••••••••••••" required/>
+            <span class="field-error" id="passErr">Password cannot be empty</span>
+          </div>
+          
+          <div class="login-options">
+            <label class="remember-me">
+              <input type="checkbox" checked style="accent-color:var(--accent)"/> Remember Me
+            </label>
+            <a href="#" class="forgot-pass" onclick="alert('Password reset link sent to your registered email.')">Forgot Password?</a>
+          </div>
+          
+          <button type="submit" class="btn-submit">
+            Sign In
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+        
+        <div class="login-footer">
+          Don't have an active system? <a href="contact.html?type=strategy">Get Started Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOADER SCREEN -->
+    <div class="loader-container" id="loaderScreen">
+      <div class="galaxy-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring two"></div>
+        <div class="spinner-ring three"></div>
+      </div>
+      <h2 class="loader-title">Authenticating Session</h2>
+      <p class="loader-status" id="loaderStatus">Securing connection to BuildFlow Cloud...</p>
+    </div>
+
+    <!-- COMMAND CENTER DASHBOARD -->
+    <div class="dashboard-container" id="dashboardScreen">
+      <div class="dash-card">
+        
+        <!-- SIDEBAR -->
+        <aside class="dash-sidebar">
+          <a href="index.html" class="ds-logo">Build<span>Flow</span></a>
+          <ul class="ds-menu">
+            <li class="ds-item active" onclick="switchTab(this, 'tabDashboard')">
+              <span class="ds-icon">📊</span>Dashboard
+            </li>
+            <li class="ds-item" onclick="switchTab(this, 'tabLeads')">
+              <span class="ds-icon">👤</span>Leads
+            </li>
+            <li class="ds-item" onclick="switchTab(this, 'tabVoiceLogs')">
+              <span class="ds-icon">📞</span>AI Voice Logs
+            </li>
+            <li class="ds-item" onclick="switchTab(this, 'tabAutomations')">
+              <span class="ds-icon">🤖</span>Automations
+            </li>
+            <li class="ds-item" onclick="switchTab(this, 'tabSettings')">
+              <span class="ds-icon">⚙️</span>Settings
+            </li>
+            <li class="ds-item" onclick="window.location.href='index.html'" style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">
+              <span class="ds-icon">🌐</span>Back to Website
+            </li>
+            <li class="ds-item" onclick="logoutSession()">
+              <span class="ds-icon">🚪</span>Sign Out
+            </li>
+          </ul>
+          
+          <div class="ds-profile">
+            <div class="dp-avatar" id="avatarName">SP</div>
+            <div class="dp-info">
+              <div class="dp-name" id="profileCompany">Structural Precast</div>
+              <div class="dp-role">Client Admin</div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- MAIN DASHBOARD PANEL -->
+        <div class="dash-main">
+          
+          <!-- TAB: DASHBOARD -->
+          <div class="tab-content active" id="tabDashboard">
+            <div class="dash-header">
+              <div class="dh-title">
+                <h2 id="dashWelcome">Structural Precast Command Center</h2>
+                <p>Welcome back! Your BuildFlow system is running smoothly.</p>
+              </div>
+              <div class="dh-actions">
+                <div class="status-pill"><span class="status-dot"></span>System: Active</div>
+                <button class="btn-listen" onclick="window.location.reload()" style="background:var(--accent);border:none;padding:10px 18px;font-weight:700">Refresh Data</button>
+              </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="sc-label">Total Leads Captured</div>
+                <div class="sc-value">184</div>
+                <div class="sc-change up">↑ 22% vs last month</div>
+              </div>
+              <div class="stat-card">
+                <div class="sc-label">AI Answer Rate</div>
+                <div class="sc-value">100%</div>
+                <div class="sc-change up">No missed calls</div>
+              </div>
+              <div class="stat-card">
+                <div class="sc-label">Jobs Booked</div>
+                <div class="sc-value">38</div>
+                <div class="sc-change up">↑ 14% conversion</div>
+              </div>
+              <div class="stat-card">
+                <div class="sc-label">Estimated Revenue Saved</div>
+                <div class="sc-value">$15,400</div>
+                <div class="sc-change up">From missed-call textback</div>
+              </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div style="margin-top:12px">
+              <div style="font-weight:800;font-size:16px;margin-bottom:16px;display:flex;align-items:center;justify-content:between">
+                <span>Live Lead Stream</span>
+                <span style="font-size:12px;color:var(--green);font-weight:600;margin-left:auto">● Real-time updates active</span>
+              </div>
+              <div class="lead-list">
+                <div class="lead-item">
+                  <div class="li-left">
+                    <div class="li-icon">🏠</div>
+                    <div class="li-details">
+                      <div class="li-name">John Henderson</div>
+                      <div class="li-meta">Concrete foundation installation quote request · <span>Claresholm, AB</span></div>
+                    </div>
+                  </div>
+                  <div class="li-status-col">
+                    <span class="badge-pill qualified">Qualified by Voice AI</span>
+                    <span class="li-time">5 mins ago</span>
+                  </div>
+                </div>
+                <div class="lead-item">
+                  <div class="li-left">
+                    <div class="li-icon">🚜</div>
+                    <div class="li-details">
+                      <div class="li-name">Marcus Finch</div>
+                      <div class="li-meta">Precast feed bunk supply order · <span>Fort Macleod, AB</span></div>
+                    </div>
+                  </div>
+                  <div class="li-status-col">
+                    <span class="badge-pill text-back">Missed-Call Text-Back Active</span>
+                    <span class="li-time">32 mins ago</span>
+                  </div>
+                </div>
+                <div class="lead-item">
+                  <div class="li-left">
+                    <div class="li-icon">🏢</div>
+                    <div class="li-details">
+                      <div class="li-name">Lethbridge Industrial Builders</div>
+                      <div class="li-meta">Commercial retaining wall block RFQ · <span>Lethbridge, AB</span></div>
+                    </div>
+                  </div>
+                  <div class="li-status-col">
+                    <span class="badge-pill qualified">Booked Strategy Call</span>
+                    <span class="li-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: LEADS -->
+          <div class="tab-content" id="tabLeads">
+            <div class="dash-header">
+              <div class="dh-title">
+                <h2>Leads Database</h2>
+                <p>Monitor, search, and manage all contractor leads captured by BuildFlow.</p>
+              </div>
+            </div>
+            
+            <div class="lead-list">
+              <div class="lead-item">
+                <div class="li-left">
+                  <div class="li-icon">🏠</div>
+                  <div class="li-details">
+                    <div class="li-name">John Henderson</div>
+                    <div class="li-meta">Concrete foundation installation quote request · <span>Claresholm, AB</span></div>
+                  </div>
+                </div>
+                <div class="li-status-col">
+                  <span class="badge-pill qualified">Qualified by Voice AI</span>
+                  <span class="li-time">5 mins ago</span>
+                </div>
+              </div>
+              <div class="lead-item">
+                <div class="li-left">
+                  <div class="li-icon">🚜</div>
+                  <div class="li-details">
+                    <div class="li-name">Marcus Finch</div>
+                    <div class="li-meta">Precast feed bunk supply order · <span>Fort Macleod, AB</span></div>
+                  </div>
+                </div>
+                <div class="li-status-col">
+                  <span class="badge-pill text-back">Missed-Call Text-Back Active</span>
+                  <span class="li-time">32 mins ago</span>
+                </div>
+              </div>
+              <div class="lead-item">
+                <div class="li-left">
+                  <div class="li-icon">🏢</div>
+                  <div class="li-details">
+                    <div class="li-name">Lethbridge Industrial Builders</div>
+                    <div class="li-meta">Commercial retaining wall block RFQ · <span>Lethbridge, AB</span></div>
+                  </div>
+                </div>
+                <div class="li-status-col">
+                  <span class="badge-pill qualified">Booked Strategy Call</span>
+                  <span class="li-time">2 hours ago</span>
+                </div>
+              </div>
+              <div class="lead-item">
+                <div class="li-left">
+                  <div class="li-icon">👷</div>
+                  <div class="li-details">
+                    <div class="li-name">Dave K.</div>
+                    <div class="li-meta">Precast parking bumper supply · <span>Nanton, AB</span></div>
+                  </div>
+                </div>
+                <div class="li-status-col">
+                  <span class="badge-pill qualified">Qualified by Voice AI</span>
+                  <span class="li-time">1 day ago</span>
+                </div>
+              </div>
+              <div class="lead-item">
+                <div class="li-left">
+                  <div class="li-icon">🏠</div>
+                  <div class="li-details">
+                    <div class="li-name">Rebecca Vance</div>
+                    <div class="li-meta">Residential driveway precast curbs · <span>High River, AB</span></div>
+                  </div>
+                </div>
+                <div class="li-status-col">
+                  <span class="badge-pill qualified">Qualified by Chat Bot</span>
+                  <span class="li-time">2 days ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: AI VOICE LOGS -->
+          <div class="tab-content" id="tabVoiceLogs">
+            <div class="dash-header">
+              <div class="dh-title">
+                <h2>AI Voice Agent Call Logs</h2>
+                <p>Listen to call recordings and review instant transcripts generated by your AI Receptionist.</p>
+              </div>
+            </div>
+
+            <div class="lead-list">
+              <!-- Log 1 -->
+              <div class="log-item">
+                <div class="log-header">
+                  <div class="log-caller">
+                    <span>📞</span> John Henderson (Concrete foundation installation)
+                  </div>
+                  <button class="btn-listen" onclick="toggleTranscript('trans1')">
+                    👁️ View Call Transcript
+                  </button>
+                </div>
+                <div class="log-transcript" id="trans1">
+                  <div class="tr-row">
+                    <div class="tr-spk ai">BuildFlow Voice AI</div>
+                    <div class="tr-txt">"Thanks for calling Structural Precast. This is Sarah, your AI virtual assistant. How can I help you today?"</div>
+                  </div>
+                  <div class="tr-row">
+                    <div class="tr-spk caller">John Henderson</div>
+                    <div class="tr-txt">"Hi there. I'm looking to get a quote for a precast concrete foundation for a shop building I'm putting up in Claresholm."</div>
+                  </div>
+                  <div class="tr-row">
+                    <div class="tr-spk ai">BuildFlow Voice AI</div>
+                    <div class="tr-txt">"I can absolutely help gather details for that quote! What dimensions are you looking at for the shop foundation?"</div>
+                  </div>
+                  <div class="tr-row">
+                    <div class="tr-spk caller">John Henderson</div>
+                    <div class="tr-txt">"It's going to be 40 by 60 feet. We want to start excavation in about three weeks."</div>
+                  </div>
+                  <div class="tr-row">
+                    <div class="tr-spk ai">BuildFlow Voice AI</div>
+                    <div class="tr-txt">"Excellent, 40 by 60 shop. I've logged the timeline. Let me get your best contact email and phone number, and I will have one of our engineers send you a precast estimate by tomorrow morning."</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Log 2 -->
+              <div class="log-item">
+                <div class="log-header">
+                  <div class="log-caller">
+                    <span>📞</span> Dave K. (Precast parking bumpers)
+                  </div>
+                  <button class="btn-listen" onclick="toggleTranscript('trans2')">
+                    👁️ View Call Transcript
+                  </button>
+                </div>
+                <div class="log-transcript" id="trans2">
+                  <div class="tr-row">
+                    <div class="tr-spk ai">BuildFlow Voice AI</div>
+                    <div class="tr-txt">"Hello, thanks for calling Structural Precast. This is Sarah. How can I assist you?"</div>
+                  </div>
+                  <div class="tr-row">
+                    <div class="tr-spk caller">Dave K.</div>
+                    <div class="tr-txt">"Hey, we need about 25 concrete parking bumpers delivered to Nanton. Do you guys have those in stock?"</div>
+                  </div>
+                  <div class="tr-row">
+                    <div class="tr-spk ai">BuildFlow Voice AI</div>
+                    <div class="tr-txt">"Yes, we keep standard precast parking bumpers in stock at all times. The cost is $55 per bumper plus delivery. Would you like me to book a delivery date for you?"</div>
+                  </div>
+                  <div class="tr-row">
+                    <div class="tr-spk caller">Dave K.</div>
+                    <div class="tr-txt">"Yes please, let's schedule delivery for next Tuesday."</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: AUTOMATIONS -->
+          <div class="tab-content" id="tabAutomations">
+            <div class="dash-header">
+              <div class="dh-title">
+                <h2>Active Workflow Automations</h2>
+                <p>Your systems are configured to follow up and retain leads on autopilot.</p>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <div class="settings-card">
+                <div class="settings-title">Active Triggers</div>
+                <div class="flow-chart">
+                  <div class="flow-node">
+                    <div class="flow-node-title">📞 Incoming Call Missed</div>
+                    <div class="flow-node-desc">System detects unanswered line (off hours or busy)</div>
+                  </div>
+                  <div class="flow-node">
+                    <div class="flow-node-title">💬 Missed-Call Text-Back</div>
+                    <div class="flow-node-desc">Fires SMS reply: "Hey, saw we missed your call. How can we help?"</div>
+                  </div>
+                  <div class="flow-node">
+                    <div class="flow-node-title">🤖 Lead Qualified &amp; Booked</div>
+                    <div class="flow-node-desc">Client replies, chat bot schedules them directly into CRM</div>
+                  </div>
+                </div>
+              </div>
+              <div class="settings-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px">
+                <div style="font-size:32px">🛡️</div>
+                <div style="font-weight:800;font-size:16px">Review Booster Active</div>
+                <div style="font-size:13px;color:var(--muted);max-width:300px">After completing a job in your pipeline, BuildFlow automatically waits 24 hours and sends a polite SMS review request pointing to Google Maps.</div>
+                <div style="font-size:12px;color:var(--green);font-weight:700">14 Reviews Generated This Month</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: SETTINGS -->
+          <div class="tab-content" id="tabSettings">
+            <div class="dash-header">
+              <div class="dh-title">
+                <h2>System Settings</h2>
+                <p>Configure phone numbers, business hours, and AI agent prompts.</p>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <div class="settings-card">
+                <div class="settings-title">AI Voice Agent Configuration</div>
+                <div class="form-group">
+                  <label class="form-label">Voice Tone</label>
+                  <select class="form-input" style="background:#0c0d24;border-color:var(--border)">
+                    <option>Professional &amp; Helpful (Sarah)</option>
+                    <option>Warm &amp; Conversational (Emily)</option>
+                    <option>Direct &amp; Concise (Mike)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Custom Greeting Prompt</label>
+                  <textarea class="form-input" style="height:100px;background:#0c0d24;border-color:var(--border);font-family:inherit">"Thanks for calling Structural Precast. This is Sarah, your AI virtual assistant. I can help answer questions or log quote details. How can I help you?"</textarea>
+                </div>
+                <button class="btn-listen" style="background:var(--accent);border:none;font-weight:700">Save AI Configuration</button>
+              </div>
+
+              <div class="settings-card">
+                <div class="settings-title">Company Info</div>
+                <div class="form-group">
+                  <label class="form-label">Business Location</label>
+                  <input class="form-input" type="text" value="Claresholm, Alberta, Canada" style="background:#0c0d24;border-color:var(--border)"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Notification Email</label>
+                  <input class="form-input" type="email" value="admin@structuralprecast.ca" style="background:#0c0d24;border-color:var(--border)"/>
+                </div>
+                <button class="btn-listen" style="background:var(--accent);border:none;font-weight:700">Save Profile</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">© 2025 Alberta Studio. BuildFlow is a division of Alberta Studio. Calgary, Alberta.</div>
+  </footer>
+
+</div><!-- end page-content -->
+
+<script>
+/* TAB SWITCHING */
+function switchTab(el, tabId){
+  document.querySelectorAll('.ds-item').forEach(item=>item.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(content=>content.classList.remove('active'));
+  
+  el.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+/* TRANSCRIPT TOGGLER */
+function toggleTranscript(id){
+  const el=document.getElementById(id);
+  const wasOpen=el.style.display==='block';
+  el.style.display=wasOpen?'none':'block';
+}
+
+/* LOGIN PROCESS */
+function handleLogin(){
+  const emailVal=document.getElementById('loginEmail').value;
+  
+  if(!emailVal){
+    alert('Please enter your credentials');
+    return;
+  }
+  
+  // Transition to loader
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('loaderScreen').style.display='flex';
+  
+  // Dynamic Loading Statuses
+  const statuses=[
+    "Securing connection to BuildFlow Cloud...",
+    "Querying tenant configuration...",
+    "Authenticating secure access tokens...",
+    "Syncing active AI Voice Agent channels...",
+    "Fetching leads database..."
+  ];
+  
+  let currentStep=0;
+  const statusInterval=setInterval(()=>{
+    currentStep++;
+    if(currentStep < statuses.length){
+      document.getElementById('loaderStatus').textContent=statuses[currentStep];
+    } else {
+      clearInterval(statusInterval);
+      
+      // Customize dashboard based on email domain
+      let companyName = "Contractor Admin";
+      let initials = "CA";
+      
+      if(emailVal.toLowerCase().includes('structuralprecast') || emailVal.toLowerCase().includes('precast')){
+        companyName = "Structural Precast";
+        initials = "SP";
+      } else {
+        // extract name from email
+        const parts = emailVal.split('@');
+        if(parts.length > 0){
+          const domain = parts[1].split('.')[0];
+          companyName = domain.charAt(0).toUpperCase() + domain.slice(1) + " Co.";
+          initials = domain.substring(0, 2).toUpperCase();
+        }
+      }
+      
+      document.getElementById('profileCompany').textContent=companyName;
+      document.getElementById('avatarName').textContent=initials;
+      document.getElementById('dashWelcome').textContent=companyName + " Command Center";
+      
+      // Fade in Dashboard
+      document.getElementById('loaderScreen').style.display='none';
+      document.getElementById('dashboardScreen').style.display='block';
+      document.getElementById('navBar').style.display='none'; // hide navigation during active dashboard session
+    }
+  }, 600);
+}
+
+function logoutSession() {
+  // Clear input fields
+  document.getElementById('loginEmail').value = '';
+  
+  // Hide dashboard
+  document.getElementById('dashboardScreen').style.display = 'none';
+  
+  // Show login screen
+  document.getElementById('loginScreen').style.display = 'block';
+  
+  // Show navigation bar
+  document.getElementById('navBar').style.display = 'flex';
+}
+</script>
+</body>
+</html>
